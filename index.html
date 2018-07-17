@@ -19,14 +19,14 @@
 
 <body>
 
-    <div class="container">
+    <div class="container" id="beginbox">
 
 
 
 
 
 
-        <div id="beginbox">
+        <div>
             <div id="title">
                 <div id="letsStart">
                     <h1>Dystopia Game</h1>
@@ -50,19 +50,22 @@
 
     </div>
 
-    <div class="playerOne" id="drawPile">
-        <h1>Player One! -</h1>
+    <div class="container" id="actualGame">
+
+        <div class="playerOne" id="drawPile">
+            <h1>Player One! -</h1>
+        </div>
+
+        <div class="discardPile">
+            <h1>Player One! -</h1>
+        </div>
+
+        <div class="Battlefield">
+            <h1>Player One! -</h1>
+            <span>Card1, Card2, Card3, Card4, Card5</span>
+        </div>
     </div>
 
-    <div class="discardPile">
-        <h1>Player One! -</h1>
-    </div>
-
-    <div class="Battlefield">
-        <h1>Player One! -</h1>
-        <span>Card1, Card2, Card3, Card4, Card5</span>
-    </div>
-   
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -88,6 +91,15 @@
         };
         firebase.initializeApp(config);
 
+
+
+        $(document).ready(function () {
+            $("#actualGame").hide();
+            $("#gamestart").on("click", function () {
+                $("#beginbox").hide();
+                $("#actualGame").show();
+            });
+        });
 
 
         //moment().format();
