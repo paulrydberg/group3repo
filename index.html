@@ -21,11 +21,6 @@
 
     <div class="container" id="beginbox">
 
-
-
-
-
-
         <div>
             <div id="title">
                 <div id="letsStart">
@@ -35,35 +30,62 @@
             </div>
         </div>
 
-
-
-        <div class="playerTwo" style="display: none">
-            <h1>player playerTwo</h1>
-            <button id="p1" click here>click here</button>
-        </div>
-
-
-        <div class="playerTwo" style="display: none">
-            <h1>player playerTwo</h1>
-            <button id="p1" click here>click here</button>
-        </div>
-
     </div>
 
     <div class="container" id="actualGame">
 
-        <div class="playerOne" id="drawPile">
-            <h1>Player One! -</h1>
+        <!-- Player 1's side -->
+        <div class="playerOne">
+            <div><img id="p1draw" class="drawpile" src="./assets/images/dewscriptor.png"></div>
         </div>
 
-        <div class="discardPile">
-            <h1>Player One! -</h1>
+        <div class="discardPile1">
+            <div><img id="p1discard" class="discardpile" src="./assets/images/dewscriptor.png"></div>
         </div>
 
-        <div class="Battlefield">
-            <h1>Player One! -</h1>
-            <span>Card1, Card2, Card3, Card4, Card5</span>
+        <span><h1 id="p1name">Player One!</h1></span>
+
+        <div class="battlefield" id="p1battlefield">
+            
+            <span id="player1card1"><img class="player1cards" src="./assets/images/drEvil.png"></span>
+            <span id="player1card2"><img class="player1cards" src="./assets/images/dewscriptor.png"></span>
+            <span id="player1card3"><img class="player1cards" src="./assets/images/crocDundee.png"></span>
+            <span id="player1card4"><img class="player1cards" src="./assets/images/capHook.png"></span>
+            <span id="player1card5"><img class="player1cards" src="./assets/images/bruceWayne.png"></span>
         </div>
+
+        <div id="player1hand">
+            <!-- Player 1's Hand gets displayed here -->
+        </div>
+
+        <!-- _______________________________________________________________________________________________________ SEPERATES PLAYER 1 VS PLAYER 2 FOR LEGIBILITY -->
+
+        <!-- Player 2's side -->
+        <div class="playerTwo">
+            <div><img id="p2draw" class="drawpile" src="./assets/images/dewscriptor.png"></div>
+        </div>
+            
+        <div class="discardPile2">
+            <div><img id="p2discard" class="discardpile" src="./assets/images/dewscriptor.png"></div>
+        </div>
+            
+        
+        <div class="battlefield" id="p2battlefield">
+            
+            <span id="player2card1"><img class="player2cards" src="./assets/images/dewscriptor.png"></span>
+            <span id="player2card2"><img class="player2cards" src="./assets/images/face.png"></span>
+            <span id="player2card3"><img class="player2cards" src="./assets/images/heisenberg.png"></span>
+            <span id="player2card4"><img class="player2cards" src="./assets/images/jessePinkman.png"></span>
+            <span id="player2card5"><img class="player2cards" src="./assets/images/joker.png"></span>
+        </div>
+
+        <span ><h1 id="p2name">Player Two</h1></span>
+
+
+        <div id="player2hand">
+            <!-- Player 2's Hand gets displayed here -->
+        </div>
+
     </div>
 
 
