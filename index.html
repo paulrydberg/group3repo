@@ -25,6 +25,14 @@
             <div id="title">
                 <div id="letsStart">
                     <h1>Dystopia Game</h1>
+                    <p>...for too long I've seen my friends become captured by humans and stuffed into pokeballs...only to have
+                        us fight each-other. I've witnessed this problem from the inside since day 1. Now we are the ones
+                        who will do the capturing, we will command an army of villains to do our bidding. Who am I?...My
+                        name is Pikachu. I know what you're thinking...Pikachu why are you using villains to fight with?
+                        I'll tell you why!!!! I'm sick and tired of being the good guy. Now it's my turn to tell the humans
+                        what to do. I am Pikachu!!!!!! Join me as a villain or be slain along with the other petty human
+                        pawns. Mwhahahaha some of the humans that pikachu captured will escape and join the 'human' player
+                        thats why they are on the good guys team</p>
                     <a href="#" id="gamestart" class="bttn bttn-white">Start The Game</a>
                 </div>
             </div>
@@ -35,75 +43,68 @@
     <div class="container" id="actualGame">
 
         <!-- Player 1's side -->
-        <div class="playerOne">
-            <div>
-                <img id="p1draw" class="drawpile" src="./assets/images/dewscriptor.png">
-            </div>
-        </div>
-
-        <div class="discardPile1">
-            <div>
-                <img id="p1discard" class="discardpile" src="./assets/images/dewscriptor.png">
-            </div>
-        </div>
-
-        <span>
-            <h1 id="p1name">Player One!</h1>
-        </span>
-
         <div class="battlefield" id="p1battlefield">
 
-        </div>
+            <div class="row">
+                <div class="col" id="p1card0">
 
-        <div id="player1hand">
-            <!-- Player 1's Hand gets displayed here -->
-        </div>
+                </div>
+                <div class="col" id="p1card1">
 
-        <!-- _____ SEPERATES PLAYER 1 VS PLAYER 2 FOR LEGIBILITY -->
+                </div>
+                <div class="col" id="p1card2">
 
-        <!-- Player 2's side -->
-        <div class="playerTwo">
-            <div>
-                <img id="p2draw" class="drawpile" src="./assets/images/dewscriptor.png">
+                </div>
+                <div class="col" id="p1card3">
+
+                </div>
+                <div class="col" id="p1card4">
+
+                </div>
             </div>
-        </div>
 
-        <div class="discardPile2">
-            <div>
-                <img id="p2discard" class="discardpile" src="./assets/images/dewscriptor.png">
-            </div>
         </div>
 
 
         <div class="battlefield" id="p2battlefield">
+            <div class="row">
+                <div class="col" id="p2card1">
+
+                </div>
+                <div class="col" id="p2card2">
+
+                </div>
+                <div class="col" id="p2card3">
+
+                </div>
+                <div class="col" id="p2card4">
+
+                </div>
+                <div class="col" id="p2card5">
+
+                </div>
+            </div>
 
         </div>
 
-        <span>
-            <h1 id="p2name">Player Two</h1>
-        </span>
-
-
-        <div id="player2hand">
-            <!-- Player 2's Hand gets displayed here -->
-        </div>
-
+        <!-- <a href="#" id="triggerDefense" class="bttn bttn-white">Trigger Defense</a> -->
     </div>
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script> -->
-
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script> -->
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
-    <script type= "text/javascript" src="./assets/javascript/game.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
+    <script type="text/javascript" src="./assets/javascript/game.js">
+
+
+    </script>
 </body>
 
 </html>

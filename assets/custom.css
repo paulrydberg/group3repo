@@ -43,6 +43,34 @@ body {
   padding: 17% 0;
   animation: moveInRight 1s ease-out;
 }
+
+.higherZ {
+  z-index: 2;
+}
+
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+
+.text-block {
+  /* position: absolute; */
+  top: 20px;
+  left: 45px;
+  /* padding: 10px; */
+  z-index: -1;
+  /* background-color: black;
+  color: white; */
+  /* padding-left: 20px;
+  padding-right: 20px; */
+}
+
+.p {
+  text-align: center;
+}
+
 .bttn:link,
 .bttn:visited {
   text-transform: uppercase;
@@ -50,6 +78,12 @@ body {
   padding: 15px 40px;
   display: inline-block;
 }
+.justinline {
+  display: inline-block
+}
+
+
+
 .bttn:hover {
   transform: translateY(-3px);
 }
@@ -102,10 +136,16 @@ body {
   }
 
   .player1cards {
-    width: 140px;
+    
   }
   .player2cards {
-    width: 140px;
+    
+  }
+
+  .cards {
+    width: 200px;
+    /* position: relative; */
+    /* padding: 5px; */
   }
 
   .drawpile {
