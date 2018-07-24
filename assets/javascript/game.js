@@ -1,6 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
   $("#actualGame").hide();
-  $("#gamestart").on("click", function() {
+  $("#gamestart").on("click", function () {
     $("#beginbox").hide();
     $("#actualGame").show();
   });
@@ -9,7 +9,7 @@ $(document).ready(function() {
   //   });
 
   $(".cards").hover(
-    function() {
+    function () {
       var state = $(this).attr("data-state");
 
       if (state === "face") {
@@ -94,6 +94,11 @@ var p1cardDrawn = "";
 var p2cardDrawn = "";
 var p1Hand = [];
 var p2Hand = [];
+var p1Battlefield = [];
+var p2Battlefield = [];
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// START GAME STUFF
 
 //   Grabs a deck of cards for Player 1 - More specifically this grabs an ID for the players deck to pull from API
 $.ajax({
@@ -101,15 +106,8 @@ $.ajax({
   method: "GET"
 }).then(response => {
   console.log("Player 1 Deck");
-  console.log(response);
   p1deckId = response.deck_id;
-  console.log(p1deckId);
-  //for loop draws 5 cards automatically for player at game start
-  for (var i = 0; i < 5; i++) {
-    setTimeout(p1DrawACard(p1deckId));
-    //When this function gets called an attack, defense,
-    //and customIMG key value pairs are added to the players hand for each card pulled
-  }
+  startGame(p1deckId);
 });
 
 //   Grabs a deck of cards for Player 2 - More specifically this grabs an ID for the players deck to pull from API
@@ -118,56 +116,59 @@ $.ajax({
   method: "GET"
 }).then(response => {
   console.log("Player 2 Deck");
-  console.log(response);
   p2deckId = response.deck_id;
-  console.log(p2deckId);
-  //for loop draws 5 cards automatically for player at game start
-  for (var i = 0; i < 5; i++) {
-    setTimeout(p2DrawACard(p2deckId));
-    //When this function gets called an attack, defense,
-    //and customIMG key value pairs are added to the players hand for each card pulled
-  }
+  startGame(p2deckId);
 });
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//call function to see their hand in the console
-function logHand(playerHand) {
-  console.log(playerHand);
-}
+// Adds attack, defense, and image src to first 5 cards drawn.
+addAttackValues(p1Hand);
+addDefenseValues(p1Hand);
+addImageToCards(p1Hand);
+console.log(p1Hand);
+// Adds attack, defense, and image src to first 5 cards drawn.
+addAttackValues(p2Hand);
+addDefenseValues(p2Hand);
+addImageToCards(p2Hand);
+console.log(p2Hand);
 
-// example:
-// logHand(p1Hand);
-//logHand(p2Hand);
-///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// FUNCTION DEFINITIONS
 
-// Nests an AJAX call within a function to allow for Player 1 to draw a card from the DeckOfCards API
-function p1DrawACard(playerIdDeck) {
+// Draws cards for each players and adds them to their hands.
+function startGame(playerIdDeck) {
+
+  // NEW AJAX CALL WITH THE (NOW RECEIVED FROM EARLIER AJAX CALL) player's ID. Then draws 5 cards from their respective "decks" based off the 52cardsAPI.
+
   let drawURL =
-    "https://deckofcardsapi.com/api/deck/" + playerIdDeck + "/draw/?count=1";
+    "https://deckofcardsapi.com/api/deck/" + playerIdDeck + "/draw/?count=5";
 
   $.ajax({
     url: drawURL,
     method: "GET"
   }).then(response => {
-    //console.log("P1 Card Code: " + response.cards[0].code);
-    p1Hand.push(response.cards[0]);
-    setTimeout(function() {
-      setTimeout(function() {
-        setTimeout(function() {
-          setTimeout(function() {
-            displayPlayer1Hand(p1Hand); //runs fourth after 1300ms
-          }, 1000);
-          addImageToCards(p1Hand); //runs third after 300ms
-        }, 100);
-        addDefenseValues(p1Hand); //runs second after 200ms
-      }, 100);
-      addAttackValues(p1Hand); //runs first, after 100ms
-    }, 100);
+
+    if (playerIdDeck === p1deckId) {
+
+      for (var i = 0; i < response.cards.length; i++) {
+        p1Hand.push(response.cards[i]);
+      }
+
+    }
+    else if (playerIdDeck === p2deckId) {
+
+      for (var i = 0; i < response.cards.length; i++) {
+        p2Hand.push(response.cards[i]);
+      }
+
+
+    }
+
   });
+
 }
 
-// Nests an AJAX call within a function to allow for Player 2 to draw a card from the DeckOfCards API
-function p2DrawACard(playerIdDeck) {
+// Nests an AJAX call within a function to allow for a Player to draw a card from the DeckOfCards API
+function drawACard(playerIdDeck) {
   let drawURL =
     "https://deckofcardsapi.com/api/deck/" + playerIdDeck + "/draw/?count=1";
 
@@ -176,27 +177,24 @@ function p2DrawACard(playerIdDeck) {
     method: "GET"
   }).then(response => {
     //console.log("P2 Card Code: " + response.cards[0].code);
-    p2Hand.push(response.cards[0]);
-    setTimeout(function() {
-      setTimeout(function() {
-        setTimeout(function() {
-          //   setTimeout(function() {
-          //     displayPlayer2Hand(p2Hand); //runs fourth after 1300ms
-          //   }, 1000);
-          addImageToCards(p2Hand); //runs third after 300ms
-        }, 100);
-        addDefenseValues(p2Hand); //runs second after 200ms
-      }, 100);
-      addAttackValues(p2Hand); //runs first, after 100ms
-    }, 100);
+    if (playerIdDeck === p1deckId) {
+
+      p1Hand.push(response.cards[0]);
+      console.log(p1Hand);
+
+    }
+    else if (playerIdDeck === p2deckId) {
+
+      p2Hand.push(response.cards[0]);
+      console.log(p2Hand);
+    }
+
   });
 }
 
-//setTimeout(displayPlayer1Hand);
-
 // function that loops through the player's hand array and adds attack values.
 function addAttackValues(handArray) {
-  for (var i = 0; i <= handArray.length; i++) {
+  for (var i = 0; i < handArray.length; i++) {
     //console.log(handArray[i].code);
 
     // Conditionals that add an Attack value based on their SUIT.
@@ -220,7 +218,7 @@ function addAttackValues(handArray) {
 
 // function that loops through the player's hand array and adds defense values.
 function addDefenseValues(handArray) {
-  for (var i = 0; i <= handArray.length; i++) {
+  for (var i = 0; i < handArray.length; i++) {
     //console.log(handArray[i].code);
 
     // Conditionals that add an Defense value based on their Card's Value.
@@ -240,7 +238,7 @@ function addDefenseValues(handArray) {
 }
 
 function addImageToCards(handArray) {
-  for (var i = 0; i <= handArray.length; i++) {
+  for (var i = 0; i < handArray.length; i++) {
     console.log(handArray[i]);
 
     // Conditionals that look for the value and suit and change the IMG key value pair to reflect our custom cards.
@@ -311,7 +309,7 @@ function addImageToCards(handArray) {
 }
 
 function displayPlayer1Hand(handArray) {
-  for (var i = 0; i <= handArray.length; i++) {
+  for (var i = 0; i < handArray.length; i++) {
     var IMGdiv = $("<div>");
     IMGdiv.addClass("absolute");
     IMGdiv.addClass("higherZ");
@@ -351,12 +349,8 @@ function displayPlayer1Hand(handArray) {
   }
 }
 
-//   displayPlayer1Hand(p1Hand);
-
-//   setTimeout(displayPlayer1Hand);
-
 function displayPlayer2Hand(handArray) {
-  for (var i = 0; i <= handArray.length; i++) {
+  for (var i = 0; i < handArray.length; i++) {
     var IMGdiv = $("<div>");
     IMGdiv.addClass("absolute");
     IMGdiv.addClass("higherZ");
@@ -396,70 +390,7 @@ function displayPlayer2Hand(handArray) {
   }
 }
 
-//   $(".cards").hover(
-//     function() {
-//       var state = $(this).attr("data-state");
 
-//       if (state === "face") {
-//         $(this).attr("src", $(this).attr("data-description"));
-//         $(this).attr("data-state", "description");
-//         $(this)
-//           .parent()
-//           .css("z-index", "-2");
-//       } else {
-//         $(this).attr("src", $(this).attr("data-face"));
-//         $(this).attr("data-state", "face");
-//         $(this)
-//           .parent()
-//           .css("z-index", "2");
-//       }
-//     }
 
-//     // function() {
-//     //   var state = $(this).attr("data-state");
-
-//     //   if (state === "face") {
-//     //     $(this).attr("src", $(this).attr("data-description"));
-//     //     $(this).attr("data-state", "description");
-//     //   } else {
-//     //     $(this).attr("src", $(this).attr("data-face"));
-//     //     $(this).attr("data-state", "face");
-//     //   }
-//     // }
-//   );
-
-//   //   $(".p").hover(function() {
-//   //     var NuState = $(this)
-//   //       .parent()
-//   //       .prev()
-//   //       .children(".cards")
-//   //       .attr("data-state");
-//   //     console.log(NuState);
-
-//   //     if (NuState === "face") {
-//   //       $(this).attr(
-//   //         "src",
-//   //         $(this)
-//   //           .parent()
-//   //           .prev()
-//   //           .children(".cards")
-//   //           .attr("data-description")
-//   //       );
-//   //       $(this)
-//   //         .parent()
-//   //         .prev()
-//   //         .children(".cards")
-//   //         .attr("data-state", "description");
-//   //     } else {
-//   //       $(this)
-//   //         .parent()
-//   //         .prev()
-//   //         .children(".cards")
-//   //         .attr("src", $(this).attr("data-face"));
-//   //       $(this)
-//   //         .parent()
-//   //         .prev()
-//   //         .children(".cards")
-//   //         .attr("data-state", "face");
-//   //     }
-//   //   });
+// END FUNCTION DEFINTIONS
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
