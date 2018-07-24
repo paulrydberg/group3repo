@@ -1,11 +1,11 @@
 body {
   background-image: linear-gradient(to right bottom, #7ed56fc5, #28b485bb),
-    /* url(../images/bg.jpg); */
+  url(/Users/steviesovak/Desktop/code/group3repo/assets/images/BACKGROUNDS/blood-splatter-15.jpg);
   background-size: cover;
   background-position: top;
 }
 #beginbox {
-  background-color: rgba(0, 0, 255, 0.308);
+  background-color:rgba(194, 76, 55, 0.89);
   height: 500px;
   position: absolute;
   top: 50%;
